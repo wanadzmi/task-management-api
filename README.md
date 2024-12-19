@@ -12,7 +12,7 @@
 
 ### Tasks
 - `POST /tasks/create-task/:userId`: Create new task.
-- `GET /tasks/get-task-details/:taskId`: Fetch tasks with optional filters (`userId`, `status`, `dueDate`).
+- `GET /tasks/get-task-details?<filterParam>`: Fetch tasks with optional filters (`userId`, `status`, `dueDate`) replace the filterParam.
 - `PATCH /tasks/update-task/:id`: Update task details.
 - `DELETE /tasks/delete-task/:id`: Delete a task.
 
