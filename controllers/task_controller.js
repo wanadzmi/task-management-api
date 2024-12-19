@@ -29,23 +29,34 @@ exports.createTask = (req, res) => {
 };
 
 
-
-// Get task details
+// Get tasks with optional filters
 exports.getTaskDetails = (req, res) => {
-    const { taskId } = req.params;
+    const { userId, status, dueDate } = req.query;
 
-    const task = tasks.find((task) => task.id === taskId);
+    let filteredTasks = tasks;
 
-    if (!task) {
+    if (userId) {
+        filteredTasks = filteredTasks.filter((task) => task.userId === userId);
+    }
+
+    if (status) {
+        filteredTasks = filteredTasks.filter((task) => task.status === status);
+    }
+
+    if (dueDate) {
+        filteredTasks = filteredTasks.filter((task) => task.dueDate === dueDate);
+    }
+
+    if (filteredTasks.length === 0) {
         return res.status(404).json({
-            error: 'Task not found',
-            message: `No task found with ID: ${taskId}. Please ensure the ID is correct.`,
+            error: 'No tasks found',
+            message: 'No tasks match the provided filters. Please ensure the filters are correct.',
         });
     }
 
     res.status(200).json({
-        message: 'Task retrieved successfully',
-        task: task,
+        message: 'Tasks retrieved successfully',
+        tasks: filteredTasks,
     });
 };
 

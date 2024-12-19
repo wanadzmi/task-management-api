@@ -4,7 +4,7 @@ const { createTask, getTaskDetails, updateTask, deleteTask } = require('../contr
 const router = express.Router();
 
 router.post('/create-task/:userId', createTask);
-router.get('/get-task-details/:taskId', getTaskDetails);
+router.get('/get-tasks-details', getTaskDetails);
 router.patch('/update-task/:id', updateTask);
 router.delete('/delete-task/:id', deleteTask);
 
